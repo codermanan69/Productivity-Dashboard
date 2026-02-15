@@ -14,7 +14,7 @@ function openfeatures() {
 
     })
 }
-// openfeatures()
+openfeatures()
 
 function todolist() {
     let form = document.querySelector('.addtask form')
@@ -89,5 +89,5 @@ function todolist() {
 
 }
 
-// todolist()
+todolist()
 
