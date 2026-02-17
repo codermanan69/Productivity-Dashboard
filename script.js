@@ -150,3 +150,90 @@ console.log(response)
 }
 
 fetchQuote()
+
+
+function pomodoroTimer() {
+
+
+    let timer = document.querySelector('.pomo-timer h1')
+    var startBtn = document.querySelector('.pomo-timer .start-timer')
+    var pauseBtn = document.querySelector('.pomo-timer .pause-timer')
+    var resetBtn = document.querySelector('.pomo-timer .reset-timer')
+    var session = document.querySelector('.pomodoro-fullpage .session')
+    var isWorkSession = true
+
+    let totalSeconds = 25 * 60
+    let timerInterval = null
+
+    function updateTimer() {
+        let minutes = Math.floor(totalSeconds / 60)
+        let seconds = totalSeconds % 60
+
+        timer.innerHTML = `${String(minutes).padStart('2', '0')}:${String(seconds).padStart('2', '0')}`
+    }
+
+    function startTimer() {
+        clearInterval(timerInterval)
+
+        if (isWorkSession) {
+
+            timerInterval = setInterval(function () {
+                if (totalSeconds > 0) {
+                    totalSeconds--
+                    updateTimer()
+                } else {
+                    isWorkSession = false
+                    clearInterval(timerInterval)
+                    timer.innerHTML = '05:00'
+                    session.innerHTML = 'Take a Break'
+                    session.style.backgroundColor = 'var(--blue)'
+                    totalSeconds = 5 * 60
+                }
+            }, 10)
+        } else {
+
+
+            timerInterval = setInterval(function () {
+                if (totalSeconds > 0) {
+                    totalSeconds--
+                    updateTimer()
+                } else {
+                    isWorkSession = true
+                    clearInterval(timerInterval)
+                    timer.innerHTML = '25:00'
+                    session.innerHTML = 'Work Session'
+                    session.style.backgroundColor = 'var(--green)'
+                    totalSeconds = 25 * 60
+                }
+            }, 10)
+        }
+
+    }
+
+    function pauseTimer() {
+        clearInterval(timerInterval)
+    }
+    function resetTimer() {
+        totalSeconds = 25 * 60
+        clearInterval(timerInterval)
+        updateTimer()
+
+    }
+    startBtn.addEventListener('click', startTimer)
+    pauseBtn.addEventListener('click', pauseTimer)
+    resetBtn.addEventListener('click', resetTimer)
+
+
+
+}
+
+pomodoroTimer()
+window.addEventListener("load", () => {
+  // saare full pages hide
+  document.querySelectorAll(".fullElem").forEach(elem => {
+    elem.style.display = "none";
+  });
+
+  // home cards show
+  document.querySelector(".allElems").style.display = "flex";
+});
