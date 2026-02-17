@@ -2,7 +2,7 @@
     --pri:#F8F4E1;
     --sec: #381c0a;
     --tri1: #FEBA17;
-    --tri2:#74512D;
+    --tri2:#704a24;
     --red: red;
 }
 @font-face {
@@ -282,7 +282,7 @@ justify-content: space-between;
 
 
 .daily-planner-fullpage{
-    display : block;
+    /* display : none; */
 }
 
 .daily-planner-fullpage h2{
@@ -301,6 +301,7 @@ justify-content: space-between;
     align-items: flex-start;
     justify-content: space-between;
     overflow: auto;
+
 }
 
 .daily-planner-fullpage .day-planner .day-planner-time{
@@ -310,13 +311,16 @@ justify-content: space-between;
     position: relative;
     width : 49%;
     margin-bottom: 15px;
+
 }
 
 .day-planner .day-planner-time p{
     position: absolute;
     top : 10%;
     left : 2%;
-    font-size: 24px;
+    font-size: 20px;
+    color: var(--tri1);
+    
 }
 .day-planner .day-planner-time input {
     padding : 20px 45px;
@@ -324,8 +328,162 @@ justify-content: space-between;
     background-color: var(--sec);
     border-radius: 5px;
     border: none;
-    font-size: 30px;
+    font-size: 35px;
     padding-top: 32px;
     outline: none;
+margin-top: 4px;
+}
 
+.motivational-fullpage{
+    display: block;
+    position: relative;
+
+}
+
+ .motivational-fullpage .motivation-container{
+    height : 600px;
+    width : 80%;
+    position: absolute;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50%,-50%); 
+    border-radius: 50px;
+
+}
+
+.motivational-fullpage .motivation-container::after{
+    content : '';
+    height : 100%;
+    width : 100%;
+    position: absolute;
+    background-color: var(--tri1);
+    border-radius: 50px;
+    scale : 1.15;
+    z-index: 8;
+    filter: blur(100px);
+
+}
+
+.motivational-fullpage .motivation-container .motivation-wrapper {
+    z-index: 10;
+    position: absolute;
+    width : 100%;
+    background-color: var(--tri1);
+    border-radius: 30px;
+    padding : 17px;  
+}
+
+.motivation-1 {
+    display: flex;
+  align-items: center;
+  justify-content: flex-start ;
+    
+}
+
+.motivation-1 h2{
+    font-size: 40px;
+    font-weight: 500;
+    text-align: right;
+      background-color: var(--tri2);
+    padding : 30px;
+    width : fit-content;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.motivation-2{
+    padding : 10px;
+    margin-top: 20px;
+}
+
+
+
+.motivation-2 h2{
+    font-size: 60px;
+    font-weight: 700;
+    color : var(--sec)
+}
+
+.motivation-3 h2{
+    color : white;
+    font-size: 35px;
+}
+
+.motivation-3 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+    margin-top: 30px;
+
+}
+
+.motivation-3 h2{
+    font-size: 40px;
+    font-weight: 500;
+    text-align: right;
+      background-color: var(--tri2);
+    padding : 30px;
+    width : fit-content;
+    border-radius: 20px;
+}
+
+
+.motivational-fullpage .motivation-container .motivation-wrapper img{
+    position: absolute;
+    right :5%;
+    top : 5%;
+    opacity: 0.3;
+    height : 120px;
+}
+
+.pomodoro-fullpage h2 {
+    font-size: 50px;
+}
+
+.pomodoro-fullpage .pomo-timer {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.pomo-timer h1 {
+    font-size: 170px;
+}
+
+.pomo-timer button {
+    background-color: var(--tri2);
+    padding: 15px 40px;
+    font-size: 32px;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+    -webkit-box-shadow: 7px 7px 0px var(--black);
+    box-shadow: 7px 7px 0px var(--black);
+    -webkit-transition: all ease 0.1s;
+    -o-transition: all ease 0.1s;
+    transition: all ease 0.1s;
+    font-weight: 700;
+}
+
+.pomo-timer button:active {
+    -webkit-box-shadow: 0px 0px 0px var(--black);
+    box-shadow: 0px 0px 0px var(--black);
+
+}
+
+.pomodoro-fullpage .session {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    background-color: var(--green);
+    padding: 15px 30px;
+    font-size: 30px;
+    border-radius: 5px;
 }

@@ -5,14 +5,22 @@ function openfeatures() {
     allElems.forEach(function (elem) {
         elem.addEventListener('click', function () {
             fullElemPage[elem.id].style.display = 'block'
+            localStorage.setItem('currentOpenPage', elem.id)
         })
     })
     fullElemPageBackbtn.forEach(function (back) {
         back.addEventListener('click', function () {
             fullElemPage[back.id].style.display = 'none'
+            localStorage.removeItem('currentOpenPage')
         })
 
     })
+    
+    // Restore the page on reload
+    var savedPage = localStorage.getItem('currentOpenPage')
+    if (savedPage !== null) {
+        fullElemPage[savedPage].style.display = 'block'
+    }
 }
 openfeatures()
 
@@ -34,11 +42,11 @@ function todolist() {
 
     function renderTask() {
 
-        var alltask = document.querySelector('.alltask');
+        let alltask = document.querySelector('.alltask');
 
-        var sum = ''
+        let sum = ''
 
-        currentTask.forEach(function (elem, idx) {
+        currentTask.forEach(function (elem,idx) {
             sum = sum + ` <div class="task">
                         <h5>${elem.task} <span class= ${elem.imp}>imp </span> </h5>
                         <button id= ${idx}>Mark as Completed </button>
@@ -89,5 +97,56 @@ function todolist() {
 
 }
 
-todolist()
+// todolist()
 
+function dailyPlanner() {
+    var dayPlanner = document.querySelector('.day-planner')
+
+var dayPlanData = JSON.parse(localStorage.getItem('dayPlanData')) || {}
+
+var hours = Array.from({length:18},(elem,idx)=>`${6+idx}:00 - ${7+idx}:00`)
+
+
+
+var wholedaysome = ''
+hours.forEach(function(elem,idx){
+
+     var savedData = dayPlanData[idx] || ''
+   wholedaysome = wholedaysome + `<div class="day-planner-time">
+            <p>${elem}</p>
+            <input id = ${idx} type="text" placeholder="..." value=${savedData}>
+           </div>`
+})
+
+dayPlanner.innerHTML = wholedaysome
+
+
+var dayPlannerInput = document.querySelectorAll('.day-planner input')
+
+dayPlannerInput.forEach(function(elem){
+    elem.addEventListener('input', function() {
+       dayPlanData[elem.id] = elem.value
+        
+       localStorage.setItem('dayPlanData', JSON.stringify(
+        dayPlanData
+       ))
+       
+    })
+})
+
+}
+
+dailyPlanner() 
+
+async function fetchQuote(){
+
+let response = await fetch('https://zenquotes.io/api/random')
+.then(res => res.json())
+  .then(data => {
+    console.log(data[0].q, data[0].a);
+  });
+
+console.log(response)
+}
+
+fetchQuote()
